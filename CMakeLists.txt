@@ -4,14 +4,28 @@ project(BeautifulStream)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(
-        BeautifulStream
-        main.cpp
-        src/Stream.cpp
-        src/Stream.h
-        src/IOStream.cpp
-        src/IOStream.h
-        src/utilities.cpp
-        src/utilities.h
+set(
+    BEAUTIFUL_STREAM_SOURCES
+    main.cpp
+    src/Stream.cpp
+    src/Stream.h
+    src/IOStream.cpp
+    src/IOStream.h
+    src/utilities.cpp
+    src/utilities.h
 )
 
+add_executable(
+        BeautifulStream
+        ${BEAUTIFUL_STREAM_SOURCES}
+)
+
+add_library(
+        BeautifulStreamLib
+        ${BEAUTIFUL_STREAM_SOURCES}
+)
+
+add_executable(BeautifulStreamTest tests.cpp)
+
+include_directories(gtest)
+target_link_libraries(BeautifulStreamTest BeautifulStreamLib gtest gtest_main)
