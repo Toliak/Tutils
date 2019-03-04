@@ -69,7 +69,6 @@ struct __ToString
     std::string value;
     explicit __ToString(const T &value)
     {
-        std::cout << "To string via stream" << std::endl;
         std::ostringstream ss;
         ss << value;
         __ToString::value = ss.str();
@@ -83,7 +82,6 @@ struct __ToString<int, T>
     std::string value;
     explicit __ToString(const T &value)
     {
-        std::cout << "To string via std::to_string" << std::endl;
         __ToString::value = std::to_string(value);
     }
 };
