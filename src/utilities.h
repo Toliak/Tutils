@@ -94,3 +94,13 @@ std::string toString(const T &value)
 }
 
 }
+
+template <class T>
+std::basic_string<T> operator*(const std::basic_string<T> &string, size_t times)
+{
+    std::string result;
+    for (size_t i = 0; i < times; i++) {
+        result += string;
+    }
+    return result;
+}

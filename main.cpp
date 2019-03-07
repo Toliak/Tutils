@@ -28,6 +28,8 @@ int main(int argc, char *argv[])
     std::string s2 = BeautifulStream::toString(7.0);
     std::string s3 = BeautifulStream::toString("sampletext");
 
+    console.output(std::string("asdasd") * 10);
+
     console.output(s0, "\n ", s1, '\n');
     console.output(s2, "\n ", s3, '\n');
 
