@@ -57,7 +57,7 @@ TEST_F(toString, VeryLagreNumberViaStd)
     }
 }
 
-class StringMultiplier: public ::testing::Test
+class StringAppend: public ::testing::Test
 {
 
 protected:
@@ -84,14 +84,14 @@ public:
     const size_t expectedSize = times * baseSize * stringVector.size();
 };
 
-TEST_F(StringMultiplier, EqualSize)
+TEST_F(StringAppend, EqualSize)
 {
     for (const std::string &str : stringVector) {
         EXPECT_EQ(str.size(), baseSize);
     }
 }
 
-TEST_F(StringMultiplier, ByStringstream)
+TEST_F(StringAppend, ByStringstream)
 {
     std::ostringstream stream;
     for (size_t i = 0; i < times; i++) {
@@ -103,7 +103,7 @@ TEST_F(StringMultiplier, ByStringstream)
     EXPECT_EQ(result.size(), expectedSize);
 }
 
-TEST_F(StringMultiplier, ByStringAppend)
+TEST_F(StringAppend, ByStringAppend)
 {
     std::string result;
     for (size_t i = 0; i < times; i++) {
