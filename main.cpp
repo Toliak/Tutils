@@ -3,8 +3,9 @@
 #include <memory>
 
 #include "src/IOStream.h"
-#include "src/OutputTree.h"
+#include "src/CachedTree.h"
 #include "src/utilities.h"
+#include "src/OutputTree.h"
 
 struct MyStruct
 {
@@ -20,8 +21,8 @@ struct MyStruct
 
 void printTree(BeautifulStream::IOStream &console)
 {
-    BeautifulStream::OutputTree tree0;
-    BeautifulStream::OutputTree tree1;
+    BeautifulStream::CachedTree tree0;
+    BeautifulStream::CachedTree tree1;
 
     tree1.addRow("Sample text");
     tree1.addRow(std::string("What ") * 10);
@@ -32,8 +33,14 @@ void printTree(BeautifulStream::IOStream &console)
     tree0.addRow(tree1);
     tree0.addRow("End");
 
-    console.output("OutputTree:\n");
+    console.output("CachedTree:\n");
     console.output(tree0);
+
+
+    BeautifulStream::OutputTree otree(console);
+    otree.setTabSequence("-");
+    otree.setTabSize(4);
+    otree.output("Foo ", "var", "\n");
 }
 
 int main(int argc, char *argv[])

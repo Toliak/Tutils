@@ -11,11 +11,11 @@ set(
     src/Stream.h
     src/IOStream.cpp
     src/IOStream.h
-    src/OutputTree.cpp
-    src/OutputTree.h
+        src/CachedTree.cpp
+        src/CachedTree.h
     src/utilities.cpp
     src/utilities.h
-)
+        src/Tree.cpp src/Tree.h src/InputTree.cpp src/InputTree.h src/OutputTree.cpp src/OutputTree.h)
 
 add_executable(
         BeautifulStream
