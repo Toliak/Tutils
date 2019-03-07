@@ -11,6 +11,8 @@ set(
     src/Stream.h
     src/IOStream.cpp
     src/IOStream.h
+    src/OutputTree.cpp
+    src/OutputTree.h
     src/utilities.cpp
     src/utilities.h
 )

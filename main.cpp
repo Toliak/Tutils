@@ -3,7 +3,7 @@
 #include <memory>
 
 #include "src/IOStream.h"
-//#include "src/Table.h"
+#include "src/OutputTree.h"
 #include "src/utilities.h"
 
 struct MyStruct
@@ -17,6 +17,24 @@ struct MyStruct
         return os;
     }
 };
+
+void printTree(BeautifulStream::IOStream &console)
+{
+    BeautifulStream::OutputTree tree0;
+    BeautifulStream::OutputTree tree1;
+
+    tree1.addRow("Sample text");
+    tree1.addRow(std::string("What ") * 10);
+
+    tree0.addRow("False");
+    tree0.addRow("True");
+    tree0.addRow("Sub tree: ");
+    tree0.addRow(tree1);
+    tree0.addRow("End");
+
+    console.output("OutputTree:\n");
+    console.output(tree0);
+}
 
 int main(int argc, char *argv[])
 {
@@ -32,6 +50,8 @@ int main(int argc, char *argv[])
 
     console.output(s0, "\n ", s1, '\n');
     console.output(s2, "\n ", s3, '\n');
+
+    printTree(console);
 
     auto variable = console.input<int>("Enter int: ");
     console.output("Got int: ", variable);
