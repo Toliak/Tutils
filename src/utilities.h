@@ -8,62 +8,62 @@ namespace BeautifulStream
 {
 
 // Переопределение типов, доступных для std::to_string в int
-template <class T>
+template<class T>
 struct __ToStringRemap
 {
     using type = T;
 };
 
-template <>
+template<>
 struct __ToStringRemap<unsigned long>
 {
     using type = int;
 };
 
-template <>
+template<>
 struct __ToStringRemap<long>
 {
     using type = int;
 };
 
-template <>
+template<>
 struct __ToStringRemap<unsigned int>
 {
     using type = int;
 };
 
-template <>
+template<>
 struct __ToStringRemap<int>
 {
     using type = int;
 };
 
-template <>
+template<>
 struct __ToStringRemap<unsigned long long>
 {
     using type = int;
 };
 
-template <>
+template<>
 struct __ToStringRemap<long long>
 {
     using type = int;
 };
 
-template <>
+template<>
 struct __ToStringRemap<double>
 {
     using type = int;
 };
 
-template <>
+template<>
 struct __ToStringRemap<float>
 {
     using type = int;
 };
 
 // Выполнение через поток
-template <class N, class T>
+template<class N, class T>
 struct __ToString
 {
     std::string value;
@@ -76,7 +76,7 @@ struct __ToString
 };
 
 // Выполнение через std::to_string
-template <class T>
+template<class T>
 struct __ToString<int, T>
 {
     std::string value;
@@ -87,10 +87,19 @@ struct __ToString<int, T>
 };
 
 // Преобразует тип в строку через std::to_string или через вывод в поток
-template <class T>
-std::string toString(const T &value)
+template<class T>
+inline std::string toString(const T &value)
 {
     return __ToString<typename __ToStringRemap<T>::type, T>(value).value;
+}
+
+template<class T>
+inline T fromString(const std::string &string)
+{
+    T variable;
+    std::istringstream ss(string);
+    ss >> variable;
+    return variable;
 }
 
 }
