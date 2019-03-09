@@ -1,11 +1,12 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 #include <memory>
 
 #include "src/IOStream.h"
-#include "src/CachedTree.h"
+#include "src/CachedStreamTree.h"
 #include "src/utilities.h"
-#include "src/OutputTree.h"
+#include "src/StreamTree.h"
 
 struct MyStruct
 {
@@ -21,10 +22,11 @@ struct MyStruct
 
 void printTree(BeautifulStream::IOStream &console)
 {
-    BeautifulStream::CachedTree tree0;
-    BeautifulStream::CachedTree tree1;
+    BeautifulStream::CachedStreamTree tree0(console);
+    BeautifulStream::CachedStreamTree tree1(console);
 
     tree1.addRow("Sample text");
+    tree1.addRow("What can I say: ", 2, ' ', '\n');
     tree1.addRow(std::string("What ") * 10);
 
     tree0.addRow("False");
@@ -33,14 +35,21 @@ void printTree(BeautifulStream::IOStream &console)
     tree0.addRow(tree1);
     tree0.addRow("End");
 
-    console.output("CachedTree:\n");
-    console.output(tree0);
+    console.output("CachedStreamTree:\n");
+    auto v = tree0.exec();
 
 
-    BeautifulStream::OutputTree otree(console);
+    BeautifulStream::StreamTree otree(console);
     otree.setTabSequence("-");
     otree.setTabSize(4);
-    otree.output("Foo ", "var", "\n");
+    otree.output("Foo ", "var");
+
+    otree.setTabSize(8);
+    otree.output("Var 1: ", v[0]);
+    otree.output("Var 2: ", v[1]);
+
+    otree.setTabSize(4);
+    otree.output("Foo ", "war");
 }
 
 int main(int argc, char *argv[])
@@ -55,13 +64,10 @@ int main(int argc, char *argv[])
 
     console.output(std::string("asdasd") * 10);
 
-    console.output(s0, "\n ", s1, '\n');
+    console.output(s0, "\n ", 50, '\n');
     console.output(s2, "\n ", s3, '\n');
 
     printTree(console);
-
-    auto variable = console.input<int>("Enter int: ");
-    console.output("Got int: ", variable);
 
     return 0;
 }
