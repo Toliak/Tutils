@@ -1,37 +1,21 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 2.8.8)
 
-project(BeautifulStream)
+project(BeautifulStreamLib)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(
-    BEAUTIFUL_STREAM_SOURCES
-    main.cpp
-    src/Stream.cpp
-    src/Stream.h
-    src/IOStream.cpp
-    src/IOStream.h
-    src/CachedStreamTree.cpp
-    src/CachedStreamTree.h
-    src/utilities.cpp
-    src/utilities.h
-    src/Tree.cpp
-    src/Tree.h
-    src/StreamTree.cpp
-    src/StreamTree.h
-)
-
-add_executable(
-        BeautifulStream
-        ${BEAUTIFUL_STREAM_SOURCES}
-)
-
 add_library(
         BeautifulStreamLib
-        ${BEAUTIFUL_STREAM_SOURCES}
+        Stream.cpp
+        Stream.h
+        IOStream.cpp
+        IOStream.h
+        CachedStreamTree.cpp
+        CachedStreamTree.h
+        utilities.cpp
+        utilities.h
+        Tree.cpp
+        Tree.h
+        StreamTree.cpp
+        StreamTree.h
 )
-
-add_executable(BeautifulStreamTest tests.cpp)
-
-include_directories(gtest)
-target_link_libraries(BeautifulStreamTest BeautifulStreamLib gtest gtest_main)
