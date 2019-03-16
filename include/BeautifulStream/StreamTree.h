@@ -23,17 +23,25 @@ public:
     explicit StreamTree(BeautifulStream::IOStream &ioStream);
 
     template<class ...N>
-    void output(N... args)
-    {
-        ioStream->output(Tree::tabSequence * Tree::tabSize, args..., "\n");
-    }
+    void output(N... args);
 
     template<class T, class ...N>
-    T input(N... outputArgs)
-    {
-        return ioStream->input<T>(Tree::tabSequence * Tree::tabSize, outputArgs...);
-    }
+    T input(N... outputArgs);
 
 };
+
+
+
+template<class... N>
+void StreamTree::output(N... args)
+{
+    ioStream->output(Tree::tabSequence * Tree::tabSize, args..., "\n");
+}
+
+template<class T, class... N>
+T StreamTree::input(N... outputArgs)
+{
+    return ioStream->input<T>(Tree::tabSequence * Tree::tabSize, outputArgs...);
+}
 
 }
