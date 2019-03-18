@@ -1,4 +1,4 @@
-#include "IOStream.h"
+#include "BeautifulStream/IOStream.h"
 
 namespace BeautifulStream
 {
