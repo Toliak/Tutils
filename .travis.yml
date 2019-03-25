@@ -1,0 +1,23 @@
+language: cpp
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      sudo: true
+      compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-6
+            - g++-6
+            - cmake
+
+script:
+  - gcc -v && g++ -v && cmake --version
+  - mkdir -p cmake-build-debug
+  - cd cmake-build-debug
+  - cmake ..
+  - cmake --build .
