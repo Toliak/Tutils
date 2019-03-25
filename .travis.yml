@@ -16,8 +16,8 @@ matrix:
             - cmake
 
 script:
-  - ln -s /usr/bin/gcc-8 /usr/local/bin/gcc
-  - ln -s /usr/bin/g++-8 /usr/local/bin/g++
+  - sudo ln -s /usr/bin/gcc-8 /usr/local/bin/gcc
+  - sudo ln -s /usr/bin/g++-8 /usr/local/bin/g++
   - gcc -v && g++ -v && cmake --version
   - mkdir -p cmake-build-debug
   - cd cmake-build-debug
