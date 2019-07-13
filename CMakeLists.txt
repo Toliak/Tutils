@@ -9,11 +9,7 @@ option(BUILD_TESTS Off "Build tests")
 set(
         ${PROJECT_NAME}_SOURCE
         ${CMAKE_CURRENT_SOURCE_DIR}/src/Stream.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/IOStream.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/CachedStreamTree.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/utilities.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/Tree.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/StreamTree.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/utils.cpp
 )
 
 add_library(

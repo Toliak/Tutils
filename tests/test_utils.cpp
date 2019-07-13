@@ -1,4 +1,4 @@
-#include "Tutils/utilities.h"
+#include "Tutils/utils.h"
 #include "gtest/gtest.h"
 #include <ostream>
 
