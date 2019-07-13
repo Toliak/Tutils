@@ -5,7 +5,7 @@
 #include <vector>
 #include <iostream>
 
-namespace BeautifulStream
+namespace Tutils
 {
 
 // Переопределение типов, доступных для std::to_string в int

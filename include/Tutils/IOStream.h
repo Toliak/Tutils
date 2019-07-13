@@ -7,7 +7,7 @@
 
 #include "Stream.h"
 
-namespace BeautifulStream
+namespace Tutils
 {
 
 class IOStream: public Stream

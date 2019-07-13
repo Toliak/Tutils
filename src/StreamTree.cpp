@@ -1,10 +1,10 @@
-#include "BeautifulStream/IOStream.h"
-#include "BeautifulStream/StreamTree.h"
+#include "Tutils/IOStream.h"
+#include "Tutils/StreamTree.h"
 
-namespace BeautifulStream
+namespace Tutils
 {
 
-BeautifulStream::StreamTree::StreamTree(BeautifulStream::IOStream &ioStream)
+Tutils::StreamTree::StreamTree(Tutils::IOStream &ioStream)
     : ioStream(&ioStream)
 {
 

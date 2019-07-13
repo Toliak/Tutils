@@ -5,13 +5,13 @@
 #include "IOStream.h"
 #include "utilities.h"
 
-namespace BeautifulStream
+namespace Tutils
 {
 
 class StreamTree: virtual public Tree
 {
 protected:
-    BeautifulStream::IOStream* ioStream = nullptr;
+    Tutils::IOStream* ioStream = nullptr;
 
 public:
     StreamTree() = delete;
@@ -20,7 +20,7 @@ public:
 
     ~StreamTree() override = default;
 
-    explicit StreamTree(BeautifulStream::IOStream &ioStream);
+    explicit StreamTree(Tutils::IOStream &ioStream);
 
     template<class ...N>
     void output(N... args);

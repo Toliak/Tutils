@@ -8,7 +8,7 @@
 #include "utilities.h"
 #include "StreamTree.h"
 
-namespace BeautifulStream
+namespace Tutils
 {
 
 class CachedStreamTree: public StreamTree
@@ -35,11 +35,11 @@ public:
 
     ~CachedStreamTree() override = default;
 
-    explicit CachedStreamTree(BeautifulStream::IOStream &ioStream);
+    explicit CachedStreamTree(Tutils::IOStream &ioStream);
 
-    explicit CachedStreamTree(BeautifulStream::IOStream &ioStream, const std::vector<StringCache> &rows);
+    explicit CachedStreamTree(Tutils::IOStream &ioStream, const std::vector<StringCache> &rows);
 
-    explicit CachedStreamTree(BeautifulStream::IOStream &ioStream, std::vector<StringCache> &&);
+    explicit CachedStreamTree(Tutils::IOStream &ioStream, std::vector<StringCache> &&);
 
     void addRow(const std::string &string, size_t inputSize = 0, char delimiter = '\n', char finalDelimiter = '\n');
 

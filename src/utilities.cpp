@@ -1,6 +1,6 @@
-#include "BeautifulStream/utilities.h"
+#include "Tutils/utilities.h"
 
-namespace BeautifulStream
+namespace Tutils
 {
 
 }

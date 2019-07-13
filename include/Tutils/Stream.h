@@ -1,6 +1,6 @@
 #pragma once
 
-namespace BeautifulStream
+namespace Tutils
 {
 
 class Stream

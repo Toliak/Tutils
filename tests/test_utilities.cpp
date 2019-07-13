@@ -1,41 +1,41 @@
-#include "BeautifulStream/utilities.h"
+#include "Tutils/utilities.h"
 #include "gtest/gtest.h"
 #include <ostream>
 
 TEST(ToString, NumberIntegral)
 {
-    EXPECT_EQ(BeautifulStream::toString(5), "5");
-    EXPECT_EQ(BeautifulStream::toString(6L), "6");
-    EXPECT_EQ(BeautifulStream::toString(7LL), "7");
+    EXPECT_EQ(Tutils::toString(5), "5");
+    EXPECT_EQ(Tutils::toString(6L), "6");
+    EXPECT_EQ(Tutils::toString(7LL), "7");
 
-    EXPECT_EQ(BeautifulStream::toString(8U), "8");
-    EXPECT_EQ(BeautifulStream::toString(9LU), "9");
-    EXPECT_EQ(BeautifulStream::toString(10LLU), "10");
+    EXPECT_EQ(Tutils::toString(8U), "8");
+    EXPECT_EQ(Tutils::toString(9LU), "9");
+    EXPECT_EQ(Tutils::toString(10LLU), "10");
 
-    EXPECT_EQ(BeautifulStream::toString(static_cast<short>(11)), "11");
-    EXPECT_EQ(BeautifulStream::toString(static_cast<unsigned short>(12)), "12");
+    EXPECT_EQ(Tutils::toString(static_cast<short>(11)), "11");
+    EXPECT_EQ(Tutils::toString(static_cast<unsigned short>(12)), "12");
 }
 
 TEST(ToString, NumberFloating)
 {
-    auto string = BeautifulStream::toString(5.);
+    auto string = Tutils::toString(5.);
     EXPECT_EQ(string.substr(0, 1), "5");
 
-    string = BeautifulStream::toString(6.F);
+    string = Tutils::toString(6.F);
     EXPECT_EQ(string.substr(0, 1), "6");
 
-    string = BeautifulStream::toString(7.L);
+    string = Tutils::toString(7.L);
     EXPECT_EQ(string.substr(0, 1), "7");
 }
 
 TEST(ToString, String)
 {
-    EXPECT_EQ(BeautifulStream::toString(std::string("I am string")), "I am string");
+    EXPECT_EQ(Tutils::toString(std::string("I am string")), "I am string");
 }
 
 TEST(ToString, CString)
 {
-    EXPECT_EQ(BeautifulStream::toString("I am string"), "I am string");
+    EXPECT_EQ(Tutils::toString("I am string"), "I am string");
 }
 
 class CustomStringable
@@ -58,40 +58,40 @@ public:
 TEST(ToString, Custom)
 {
     CustomStringable stringable{10, 25};
-    EXPECT_EQ(BeautifulStream::toString(stringable), "35");
+    EXPECT_EQ(Tutils::toString(stringable), "35");
 }
 
 TEST(FromString, NumberIntegral)
 {
-    EXPECT_EQ(BeautifulStream::fromString<short>("4"), 4);
-    EXPECT_EQ(BeautifulStream::fromString<int>("5"), 5);
-    EXPECT_EQ(BeautifulStream::fromString<long>("6"), 6L);
-    EXPECT_EQ(BeautifulStream::fromString<long long>("7"), 7LL);
+    EXPECT_EQ(Tutils::fromString<short>("4"), 4);
+    EXPECT_EQ(Tutils::fromString<int>("5"), 5);
+    EXPECT_EQ(Tutils::fromString<long>("6"), 6L);
+    EXPECT_EQ(Tutils::fromString<long long>("7"), 7LL);
 
-    EXPECT_EQ(BeautifulStream::fromString<unsigned short>("11"), 11);
-    EXPECT_EQ(BeautifulStream::fromString<unsigned int>("8"), 8U);
-    EXPECT_EQ(BeautifulStream::fromString<unsigned long>("9"), 9LU);
-    EXPECT_EQ(BeautifulStream::fromString<unsigned long long>("10"), 10LLU);
+    EXPECT_EQ(Tutils::fromString<unsigned short>("11"), 11);
+    EXPECT_EQ(Tutils::fromString<unsigned int>("8"), 8U);
+    EXPECT_EQ(Tutils::fromString<unsigned long>("9"), 9LU);
+    EXPECT_EQ(Tutils::fromString<unsigned long long>("10"), 10LLU);
 }
 
 TEST(FromString, NumberFloating)
 {
-    EXPECT_EQ(BeautifulStream::fromString<float>("10.7"), 10.7F);
-    EXPECT_EQ(BeautifulStream::fromString<double>("8.9"), 8.9);
-    EXPECT_EQ(BeautifulStream::fromString<long double>("9.8"), 9.8L);
+    EXPECT_EQ(Tutils::fromString<float>("10.7"), 10.7F);
+    EXPECT_EQ(Tutils::fromString<double>("8.9"), 8.9);
+    EXPECT_EQ(Tutils::fromString<long double>("9.8"), 9.8L);
 }
 
 // TODO: fix nonworking tests
 
 /*TEST(FromString, String)
 {
-    EXPECT_EQ(BeautifulStream::fromString<std::string>("I am string"), "I am string");
+    EXPECT_EQ(Tutils::fromString<std::string>("I am string"), "I am string");
 }*/
 
 /*TEST(SplitString, Empty)
 {
     EXPECT_EQ(
-        BeautifulStream::splitString<char>("", " "),
+        Tutils::splitString<char>("", " "),
         std::vector<std::string>{}
     );
 }*/
@@ -99,7 +99,7 @@ TEST(FromString, NumberFloating)
 TEST(SplitString, Good)
 {
     EXPECT_EQ(
-        BeautifulStream::splitString<char>("first,second", ","),
+        Tutils::splitString<char>("first,second", ","),
         (std::vector<std::string>{"first", "second"})
     );
 }
@@ -107,7 +107,7 @@ TEST(SplitString, Good)
 TEST(SplitString, NoSeparator)
 {
     EXPECT_EQ(
-        BeautifulStream::splitString<char>("first,second", " "),
+        Tutils::splitString<char>("first,second", " "),
         (std::vector<std::string>{"first,second"})
     );
 }
@@ -115,7 +115,7 @@ TEST(SplitString, NoSeparator)
 /*TEST(SplitString, EmptySeparator)
 {
     EXPECT_EQ(
-        BeautifulStream::splitString<char>("first,second", ""),
+        Tutils::splitString<char>("first,second", ""),
         (std::vector<std::string>{"first,second"})
     );
 }*/

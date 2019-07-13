@@ -1,6 +1,6 @@
-#include "BeautifulStream/IOStream.h"
+#include "Tutils/IOStream.h"
 
-namespace BeautifulStream
+namespace Tutils
 {
 
 IOStream::IOStream(std::istream &istream)

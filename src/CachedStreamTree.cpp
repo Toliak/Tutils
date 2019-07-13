@@ -1,22 +1,22 @@
-#include "BeautifulStream/CachedStreamTree.h"
+#include "Tutils/CachedStreamTree.h"
 
-namespace BeautifulStream
+namespace Tutils
 {
 
-BeautifulStream::CachedStreamTree::CachedStreamTree(BeautifulStream::IOStream &ioStream)
+Tutils::CachedStreamTree::CachedStreamTree(Tutils::IOStream &ioStream)
     : StreamTree(ioStream)
 {
 
 }
 
-CachedStreamTree::CachedStreamTree(BeautifulStream::IOStream &ioStream,
+CachedStreamTree::CachedStreamTree(Tutils::IOStream &ioStream,
                                    const std::vector<CachedStreamTree::StringCache> &rows)
     : CachedStreamTree(ioStream, std::vector<StringCache>(rows))
 {
 
 }
 
-CachedStreamTree::CachedStreamTree(BeautifulStream::IOStream &ioStream, std::vector<CachedStreamTree::StringCache> &&)
+CachedStreamTree::CachedStreamTree(Tutils::IOStream &ioStream, std::vector<CachedStreamTree::StringCache> &&)
     : StreamTree(ioStream), rows(std::forward<std::vector<StringCache>>(rows))
 {
 

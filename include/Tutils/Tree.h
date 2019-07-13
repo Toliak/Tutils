@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <string>
 
-namespace BeautifulStream
+namespace Tutils
 {
 
 class Tree
