@@ -81,4 +81,48 @@ TEST(FromString, NumberFloating)
     EXPECT_EQ(BeautifulStream::fromString<long double>("9.8"), 9.8L);
 }
 
-// TODO: string from string test
+// TODO: fix nonworking tests
+
+/*TEST(FromString, String)
+{
+    EXPECT_EQ(BeautifulStream::fromString<std::string>("I am string"), "I am string");
+}*/
+
+/*TEST(SplitString, Empty)
+{
+    EXPECT_EQ(
+        BeautifulStream::splitString<char>("", " "),
+        std::vector<std::string>{}
+    );
+}*/
+
+TEST(SplitString, Good)
+{
+    EXPECT_EQ(
+        BeautifulStream::splitString<char>("first,second", ","),
+        (std::vector<std::string>{"first", "second"})
+    );
+}
+
+TEST(SplitString, NoSeparator)
+{
+    EXPECT_EQ(
+        BeautifulStream::splitString<char>("first,second", " "),
+        (std::vector<std::string>{"first,second"})
+    );
+}
+
+/*TEST(SplitString, EmptySeparator)
+{
+    EXPECT_EQ(
+        BeautifulStream::splitString<char>("first,second", ""),
+        (std::vector<std::string>{"first,second"})
+    );
+}*/
+
+TEST(StringMultiply, Simple)
+{
+    EXPECT_EQ(std::string("-") * 5, "-----");
+    EXPECT_EQ(std::string("-") * 7, "-------");
+    EXPECT_EQ(std::string("-") * 0, "");
+}
