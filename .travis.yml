@@ -22,4 +22,4 @@ script:
   - cd cmake-build-debug
   - cmake .. -DBUILD_TESTS=On
   - cmake --build .
-  - cmake --build . --target test
+  - ./BeautifulStreamTest
