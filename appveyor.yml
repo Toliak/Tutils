@@ -18,7 +18,7 @@ before_build:
   - cmake .. -DBUILD_TESTS=On -Dgtest_force_shared_crt=On -G "Visual Studio 15 2017 Win64"
 
 build:
-  project: $(APPVEYOR_BUILD_FOLDER)/build/ALL_BUILD.sln
+  project: $(APPVEYOR_BUILD_FOLDER)/build/$(APPVEYOR_PROJECT_NAME).sln
 
 test_script:
   - '%APPVEYOR_BUILD_FOLDER%/build/%CONFIGURATION%/%APPVEYOR_PROJECT_NAME%Test.exe'
