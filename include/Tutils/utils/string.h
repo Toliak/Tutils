@@ -60,7 +60,7 @@ std::string fromString(const std::string &string)
 }
 
 template<class T>
-std::vector<std::string> splitString(std::string string, const std::string &separator)
+std::vector<std::string> splitString(std::string string, const std::string &separator, bool removeEmpty = true)
 {
     if (separator.empty()) {
         return {std::move(string)};
@@ -80,6 +80,13 @@ std::vector<std::string> splitString(std::string string, const std::string &sepa
         } else {
             result.emplace_back(std::move(string));
             break;
+        }
+
+        if (removeEmpty) {      // Remove empty strings
+            result.erase(
+                std::remove(result.begin(), result.end(), ""),
+                result.end()
+            );
         }
     }
 

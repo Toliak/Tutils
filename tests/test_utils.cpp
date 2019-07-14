@@ -110,6 +110,14 @@ TEST(SplitString, NoSeparator)
     );
 }
 
+TEST(SplitString, DoubleSeparator)
+{
+    EXPECT_EQ(
+        Tutils::splitString<char>("double  sep", " "),
+        (std::vector<std::string>{"double", "sep"})
+    );
+}
+
 TEST(SplitString, EmptySeparator)
 {
     EXPECT_EQ(
