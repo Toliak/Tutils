@@ -1,43 +1,24 @@
-version: '{build}'
-clone_folder: c:\projects\cmake-init
-image:
-  - Visual Studio 2017
+version: '1.0.{build}'
 
-configuration:
-  - Release
+image: Visual Studio 2017
 
 platform:
   - x64
 
-environment:
-  matrix:
-    - arch: Win64
-  # - arch: #does not work, Release|x64 not a valid target
+configuration:
+  - Release
+  - Debug
 
-matrix:
-  fast_finish: true
-
-# skip unsupported combinations
-init:
-  - set arch=
-  - if "%arch%"=="Win64" ( set arch= Win64)
-  - echo %arch%
-  - echo %APPVEYOR_BUILD_WORKER_IMAGE%
-  - if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2017" ( set generator="Visual Studio 15 2017%arch%" )
-  - echo %generator%
+install:
+  - git submodule update --init --recursive
 
 before_build:
-  - cmd: |-
-      mkdir build
-      cd build
-      cmake --version
-      cmake .. -DBUILD_TESTS=On -G %generator%
+  - mkdir build
+  - cd build
+  - cmake -G "Visual Studio 15 2017 Win64" .
 
 build:
-  project: c:\projects\cmake-init\build\Tutils.sln
-  verbosity: minimal
-  parallel: true
+  project: $(APPVEYOR_BUILD_FOLDER)\$(APPVEYOR_PROJECT_NAME).sln
 
-after_build:
-  - cmd: |-
-      TutilsTest.exe
+test_script:
+  - '%APPVEYOR_BUILD_FOLDER%\%CONFIGURATION%\%APPVEYOR_PROJECT_NAME%Test.exe'
