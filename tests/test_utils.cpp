@@ -126,6 +126,45 @@ TEST(SplitString, EmptySeparator)
     );
 }
 
+TEST(JoinIntoString, OneString)
+{
+    EXPECT_EQ(Tutils::joinIntoString(" ", "string"), "string");
+}
+
+TEST(JoinIntoString, ThreeStrings)
+{
+    EXPECT_EQ(Tutils::joinIntoString(" ", "string", "and", "another"), "string and another");
+}
+
+TEST(JoinIntoString, Variadic)
+{
+    EXPECT_EQ(
+        Tutils::joinIntoString(
+            "-",
+            55UL,
+            "string",
+            -11LL,
+            "another",
+            0
+        ),
+        "55-string--11-another-0"
+    );
+}
+
+TEST(JoinIntoString, VariadicWithCustom)
+{
+    CustomStringable stringable{11, 25};
+    EXPECT_EQ(
+        Tutils::joinIntoString(
+            ",",
+            "string",
+            stringable,
+            "another"
+        ),
+        "string,36,another"
+    );
+}
+
 TEST(StringMultiply, Simple)
 {
     EXPECT_EQ(std::string("-") * 1, "-");

@@ -93,6 +93,37 @@ std::vector<std::string> splitString(std::string string, const std::string &sepa
     return result;
 }
 
+std::string joinIntoString(const std::string &delimiter, std::string value)
+{
+    return std::move(value);
+}
+
+template<
+    typename T,
+    typename ...H,
+    int = 0
+>
+std::string joinIntoString(const std::string &delimiter, const std::string &string, T value, H... arguments)
+{
+    return joinIntoString(delimiter, string + delimiter + toString(value), arguments...);
+}
+
+template<
+    typename T,
+    typename ...H,
+    typename std::enable_if<
+        !std::is_same<
+            typename std::remove_cv<typename std::remove_reference<T>::type>::type,
+            std::string
+        >::value,
+        int
+    >::type = 0
+>
+std::string joinIntoString(const std::string &delimiter, T value, H... arguments)
+{
+    return joinIntoString(delimiter, toString(value), arguments...);
+}
+
 }
 
 template<class T>
