@@ -18,7 +18,7 @@ before_build:
   - cmake .. -DBUILD_TESTS=On -G "Visual Studio 15 2017 Win64"
 
 build:
-  project: $(APPVEYOR_BUILD_FOLDER)\$(APPVEYOR_PROJECT_NAME).sln
+  project: $(APPVEYOR_BUILD_FOLDER)/build/$(APPVEYOR_PROJECT_NAME).sln
 
 test_script:
   - '%APPVEYOR_BUILD_FOLDER%\%CONFIGURATION%\%APPVEYOR_PROJECT_NAME%Test.exe'
