@@ -2,14 +2,18 @@ version: '{build}'
 clone_folder: c:\projects\cmake-init
 image:
   - Visual Studio 2017
+
 configuration:
   - Release
+
 platform:
   - x64
+
 environment:
   matrix:
     - arch: Win64
   # - arch: #does not work, Release|x64 not a valid target
+
 matrix:
   fast_finish: true
 
@@ -28,10 +32,12 @@ before_build:
       cd build
       cmake --version
       cmake .. -DBUILD_TESTS=On -G %generator%
+
 build:
   project: c:\projects\cmake-init\build\Tutils.sln
   verbosity: minimal
   parallel: true
+
 after_build:
   - cmd: |-
       TutilsTest.exe
