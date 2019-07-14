@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include <type_traits>
+#include <ostream>
 #include <sstream>
 #include <vector>
 #include <iostream>
@@ -8,90 +10,49 @@
 namespace Tutils
 {
 
-// Переопределение типов, доступных для std::to_string в int
-template<class T>
-struct __ToStringRemap
+template<
+    typename T,
+    typename std::enable_if<
+        std::is_arithmetic<
+            typename std::remove_cv<typename std::remove_reference<T>::type>::type
+        >::value,
+        int
+    >::type = 0
+>
+std::string toString(T value)
 {
-    using type = T;
-};
+    return std::to_string(value);
+}
 
-template<>
-struct __ToStringRemap<unsigned long>
+template<
+    typename T,
+    typename std::enable_if<
+        std::is_same<
+            decltype(std::declval<std::ostream &>() << std::declval<T>()),
+            std::ostream &
+        >::value
+            && !std::is_arithmetic<
+                typename std::remove_cv<typename std::remove_reference<T>::type>::type
+            >::value,
+        int
+    >::type = 0
+>
+std::string toString(const T &value)
 {
-    using type = int;
-};
+    std::cout << "Stream!" << std::endl;
+    std::ostringstream stream;
+    stream << value;
+    return stream.str();
+}
 
-template<>
-struct __ToStringRemap<long>
+inline std::string toString(const std::string &value)
 {
-    using type = int;
-};
+    return value;
+}
 
-template<>
-struct __ToStringRemap<unsigned int>
+inline std::string toString(const char *value)
 {
-    using type = int;
-};
-
-template<>
-struct __ToStringRemap<int>
-{
-    using type = int;
-};
-
-template<>
-struct __ToStringRemap<unsigned long long>
-{
-    using type = int;
-};
-
-template<>
-struct __ToStringRemap<long long>
-{
-    using type = int;
-};
-
-template<>
-struct __ToStringRemap<double>
-{
-    using type = int;
-};
-
-template<>
-struct __ToStringRemap<float>
-{
-    using type = int;
-};
-
-// Выполнение через поток
-template<class N, class T>
-struct __ToString
-{
-    std::string value;
-    explicit __ToString(const T &value)
-    {
-        std::ostringstream ss;
-        ss << value;
-        __ToString::value = ss.str();
-    }
-};
-
-// Выполнение через std::to_string
-template<class T>
-struct __ToString<int, T>
-{
-    std::string value;
-    explicit __ToString(const T &value)
-    {
-        __ToString::value = std::to_string(value);
-    }
-};
-
-// Преобразует тип в строку через std::to_string или через вывод в поток
-template<class T>
-inline std::string toString(const T &value)
-{
-    return __ToString<typename __ToStringRemap<T>::type, T>(value).value;
+    return std::string(value);
 }
 
 template<class T>
