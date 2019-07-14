@@ -15,10 +15,10 @@ install:
 before_build:
   - mkdir build
   - cd build
-  - cmake .. -DBUILD_TESTS=On -G "Visual Studio 15 2017 Win64"
+  - cmake .. -DBUILD_TESTS=On -Dgtest_force_shared_crt=On -G "Visual Studio 15 2017 Win64"
 
 build:
-  project: $(APPVEYOR_BUILD_FOLDER)/build/$(APPVEYOR_PROJECT_NAME).sln
+  project: $(APPVEYOR_BUILD_FOLDER)/build/BUILD_ALL.sln
 
 test_script:
-  - '%APPVEYOR_BUILD_FOLDER%\%CONFIGURATION%\%APPVEYOR_PROJECT_NAME%Test.exe'
+  - '%APPVEYOR_BUILD_FOLDER%/build/%CONFIGURATION%/%APPVEYOR_PROJECT_NAME%Test.exe'
