@@ -81,20 +81,18 @@ TEST(FromString, NumberFloating)
     EXPECT_EQ(Tutils::fromString<long double>("9.8"), 9.8L);
 }
 
-// TODO: fix nonworking tests
-
-/*TEST(FromString, String)
+TEST(FromString, String)
 {
     EXPECT_EQ(Tutils::fromString<std::string>("I am string"), "I am string");
-}*/
+}
 
-/*TEST(SplitString, Empty)
+TEST(SplitString, Empty)
 {
     EXPECT_EQ(
-        Tutils::splitString<char>("", " "),
-        std::vector<std::string>{}
+        Tutils::splitString<char>("no_separator_here", ""),
+        std::vector<std::string>{"no_separator_here"}
     );
-}*/
+}
 
 TEST(SplitString, Good)
 {
@@ -112,17 +110,29 @@ TEST(SplitString, NoSeparator)
     );
 }
 
-/*TEST(SplitString, EmptySeparator)
+TEST(SplitString, EmptySeparator)
 {
     EXPECT_EQ(
         Tutils::splitString<char>("first,second", ""),
         (std::vector<std::string>{"first,second"})
     );
-}*/
+}
 
 TEST(StringMultiply, Simple)
 {
+    EXPECT_EQ(std::string("-") * 1, "-");
     EXPECT_EQ(std::string("-") * 5, "-----");
     EXPECT_EQ(std::string("-") * 7, "-------");
+}
+
+TEST(StringMultiply, Zero)
+{
     EXPECT_EQ(std::string("-") * 0, "");
+}
+
+TEST(StringMultiply, Negative)
+{
+    EXPECT_EQ(std::string("test") * -1, "tset");
+    EXPECT_EQ(std::string("-") * -5, "-----");
+    EXPECT_EQ(std::string("qw") * -3, "wqwqwq");
 }
