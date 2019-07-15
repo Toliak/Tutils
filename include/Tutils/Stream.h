@@ -2,6 +2,7 @@
 
 #include <istream>
 #include <ostream>
+#include <string>
 
 namespace Tutils
 {
@@ -32,8 +33,16 @@ public:
 
     StreamWrapper &operator=(StreamWrapper &&) = delete;
 
+    /**
+     * @brief Ignores specific character
+     * @param ignore Char to ignore
+     */
     void ignoreChar(char ignore = '\n');
 
+    /**
+     * @brief Write text to output stream
+     * @param outputText Text to write
+     */
     void write(const std::string &outputText);
 
     /**
