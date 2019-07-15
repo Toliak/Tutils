@@ -1,2 +1,3 @@
 # Tutils
-Some improvements for C++ streams
+
+Utilities for interaction with std::string or streams
