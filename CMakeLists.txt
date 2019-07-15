@@ -1,22 +1,39 @@
-cmake_minimum_required(VERSION 2.8.8)
+cmake_minimum_required(VERSION 3.0)
 
-project(BeautifulStream)
+project(Tutils)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_library(
-        BeautifulStream
-        src/Stream.cpp
-        src/IOStream.cpp
-        src/CachedStreamTree.cpp
-        src/utilities.cpp
-        src/Tree.cpp
-        src/StreamTree.cpp
+option(BUILD_TESTS Off "Build tests")
+
+set(
+        ${PROJECT_NAME}_SOURCE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Stream.cpp
 )
 
-set(BeautifulStreamInclude "${CMAKE_CURRENT_SOURCE_DIR}/include")
+add_library(
+        ${PROJECT_NAME}
+        STATIC
+        ${${PROJECT_NAME}_SOURCE}
+)
 
-include_directories(${BeautifulStreamInclude})
+set(
+        ${PROJECT_NAME}_INCLUDE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
 
-target_include_directories(BeautifulStream SYSTEM INTERFACE
-        "$<BUILD_INTERFACE:${BeautifulStreamInclude}>")
+include_directories(${${PROJECT_NAME}_INCLUDE})
+
+target_include_directories(${PROJECT_NAME} SYSTEM INTERFACE
+        "$<BUILD_INTERFACE:${${PROJECT_NAME}_INCLUDE}>")
+
+if (BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(lib/gtest)
+
+    file(GLOB ${PROJECT_NAME}_TESTS_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp)
+    add_executable(${PROJECT_NAME}Test ${${PROJECT_NAME}_TESTS_SOURCE})
+    target_link_libraries(${PROJECT_NAME}Test ${PROJECT_NAME} gtest)
+
+    add_test(NAME ${PROJECT_NAME}Test COMMAND ${PROJECT_NAME}Test)
+endif()
