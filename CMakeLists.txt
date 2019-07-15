@@ -9,7 +9,6 @@ option(BUILD_TESTS Off "Build tests")
 set(
         ${PROJECT_NAME}_SOURCE
         ${CMAKE_CURRENT_SOURCE_DIR}/src/Stream.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/utils.cpp
 )
 
 add_library(
@@ -34,7 +33,7 @@ if (BUILD_TESTS)
 
     file(GLOB ${PROJECT_NAME}_TESTS_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp)
     add_executable(${PROJECT_NAME}Test ${${PROJECT_NAME}_TESTS_SOURCE})
-    target_link_libraries(${PROJECT_NAME}Test gtest)
+    target_link_libraries(${PROJECT_NAME}Test ${PROJECT_NAME} gtest)
 
     add_test(NAME ${PROJECT_NAME}Test COMMAND ${PROJECT_NAME}Test)
 endif()
